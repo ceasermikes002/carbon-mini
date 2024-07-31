@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { QuestionMarkCircleIcon, LockClosedIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const SecurityComponent: React.FC = () => {
   const [seconds, setSeconds] = useState(60);
   const [isResendEnabled, setIsResendEnabled] = useState(false);
   const [otp, setOtp] = useState<string[]>(Array(6).fill(''));
   const inputRefs = useRef<HTMLInputElement[]>([]);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     if (seconds > 0) {
@@ -21,6 +23,7 @@ const SecurityComponent: React.FC = () => {
   const handleResendCode = () => {
     setSeconds(60);
     setIsResendEnabled(false);
+    // Add logic to resend the OTP code
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -53,6 +56,9 @@ const SecurityComponent: React.FC = () => {
     setOtp(Array(6).fill(''));
     // Optionally, you might want to refocus the first input
     inputRefs.current[0]?.focus();
+
+    // Navigate to /mail on successful submission
+    navigate('/mail');
   };
 
   return (
@@ -66,13 +72,12 @@ const SecurityComponent: React.FC = () => {
       <div className="max-w-md mx-auto bg-white p-6 space-y-10 mt-12">
         <h1 className="text-3xl text-[#09275b] font-bold mb-4">Security Check</h1>
         <p className="text-[#a0a0a0] mb-4">
-        We would like to verify your account ownership using the code we sent to your email
-          <br />
+          We would like to verify your account ownership using the code we sent to your email
         </p>
         <div className="flex justify-center mb-4">
           <LockClosedIcon className="h-12 w-12 text-gray-600" />
         </div>
-        
+
         {/* OTP Input Fields */}
         <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
           <div className="flex justify-center gap-2 mb-6">
@@ -97,8 +102,6 @@ const SecurityComponent: React.FC = () => {
             ))}
           </div>
 
-         
-         
           {/* Submit Button */}
           <button
             type="submit"
@@ -108,6 +111,7 @@ const SecurityComponent: React.FC = () => {
           </button>
         </form>
 
+        {/* Resend Code Section */}
         <div className="flex flex-col items-center mt-4">
           <p className="text-gray-700 mb-8">
             {isResendEnabled ? (

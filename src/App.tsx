@@ -12,9 +12,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path="/otp" element={<Otp/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/security" element={<Security/>}/>
+          <Route path="/verify" element={<Otp/>}/>
+          <Route path="/mail" element={<Login/>}/>
+          <Route path="/otp" element={<Security/>}/>
         </Routes>
       </Router>
     </>

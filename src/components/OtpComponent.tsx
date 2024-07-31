@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import { QuestionMarkCircleIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
 
 const OtpComponent = () => {
   const [seconds, setSeconds] = useState(60);
   const [isResendEnabled, setIsResendEnabled] = useState(false);
+  const [otp, setOtp] = useState<string[]>(Array(6).fill(''));
   const inputs = useRef<(HTMLInputElement | null)[]>([]);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     if (seconds > 0) {
@@ -20,17 +23,25 @@ const OtpComponent = () => {
   const handleResendCode = () => {
     setSeconds(60);
     setIsResendEnabled(false);
+    // Add your logic to resend the OTP code here
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>, index: number) => {
     const value = event.target.value;
-    
-    // Ensure only numbers are allowed
     if (/^\d*$/.test(value)) {
+      const updatedOtp = [...otp];
+      updatedOtp[index] = value;
+      setOtp(updatedOtp);
+
       if (value.length > 0 && index < inputs.current.length - 1) {
         inputs.current[index + 1]?.focus();
       } else if (value.length === 0 && index > 0) {
         inputs.current[index - 1]?.focus();
+      }
+
+      // Navigate if all fields are filled
+      if (updatedOtp.every(v => v.length > 0)) {
+        handleSubmit(); // Call submit function
       }
     }
   };
@@ -45,6 +56,12 @@ const OtpComponent = () => {
     const minutes = Math.floor(secs / 60);
     const seconds = secs % 60;
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const handleSubmit = () => {
+    // Here you can add logic to verify the OTP, e.g., send to an API
+    // For demonstration, we'll directly navigate to /otp
+    navigate('/otp');
   };
 
   return (

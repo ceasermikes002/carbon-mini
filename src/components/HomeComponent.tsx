@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const HomeComponent: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [mobileNumber, setMobileNumber] = useState("");
   const [loginPin, setLoginPin] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
@@ -18,7 +21,7 @@ const HomeComponent: React.FC = () => {
       console.log("Submitted Mobile Number:", mobileNumber);
       console.log("Submitted Login Pin:", loginPin);
       setLoading(false);
-      // Add your logic here for further processing
+      navigate('/verify'); // Navigate to /verify on success
     }, 1000); // Simulating async operation with setTimeout
   };
 
@@ -41,8 +44,8 @@ const HomeComponent: React.FC = () => {
   return (
     <div className="relative min-h-screen flex flex-col justify-between p-4">
       {/* Question Mark Icon */}
-      <div className="absolute top-4 right-4 w-8 h-8 text-2xl cursor-pointer  rounded-full flex items-center justify-center">
-      <QuestionMarkCircleIcon className="h-6 w-6 text-gray-600" />
+      <div className="absolute top-4 right-4 w-8 h-8 text-2xl cursor-pointer rounded-full flex items-center justify-center">
+        <QuestionMarkCircleIcon className="h-6 w-6 text-gray-600" />
       </div>
 
       {/* Main Content */}
@@ -57,9 +60,7 @@ const HomeComponent: React.FC = () => {
         <hr className="my-4" />
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-9">
           <label htmlFor="mobileNumber" className="flex flex-col">
-            <span className="text-sm font-semibold mb-1 flex">
-              Mobile number
-            </span>
+            <span className="text-sm font-semibold mb-1 flex">Mobile number</span>
             <input
               type="text"
               id="mobileNumber"
