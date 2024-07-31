@@ -62,8 +62,7 @@ const OtpComponent = () => {
           <PhoneIcon className="h-6 w-6 text-gray-500" />
           {/* Text */}
           <p className="text-gray-700 flex-1">
-            Enter the 6-digit code we just sent by SMS to 09026736260{' '}
-            <span className="text-[#5f40b0] font-semibold cursor-pointer">(Change)</span>
+            Enter the 6-digit code we just sent to your SMS<span className="text-[#5f40b0] font-semibold cursor-pointer">(Change)</span>
           </p>
         </div>
         <hr className="mb-6" />
