@@ -64,7 +64,7 @@ const SecurityComponent: React.FC = () => {
   return (
     <div className="relative min-h-screen p-4">
       {/* Question Mark Icon */}
-      <div className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center bg-gray-300">
+      <div className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center">
         <QuestionMarkCircleIcon className="h-6 w-6 text-gray-600" />
       </div>
 
